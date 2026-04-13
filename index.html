@@ -36,11 +36,6 @@ h1 {
   text-shadow: 0 0 20px pink;
 }
 
-/* text */
-p {
-  font-size: clamp(14px, 3.5vw, 20px);
-}
-
 /* input */
 input {
   padding: 12px;
@@ -63,14 +58,14 @@ button {
   cursor: pointer;
 }
 
-/* gif */
-.cat, .dog {
-  width: 140px;
+/* meme */
+.meme {
+  width: 150px;
   margin-top: 15px;
-  cursor: pointer;
-  animation: bounce 2s infinite;
+  animation: fadeIn 0.6s ease, bounce 2s infinite;
 }
 
+/* animations */
 @keyframes gradientMove {
   0%{background-position:0% 50%;}
   50%{background-position:100% 50%;}
@@ -80,6 +75,11 @@ button {
 @keyframes bounce {
   0%,100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px);}
+  to { opacity: 1; transform: translateY(0);}
 }
 
 @keyframes fall {
@@ -100,50 +100,55 @@ button {
 <div class="page active" id="p1">
   <h1>💖 Chào người em yêu ạ! 💖</h1>
   <p>Nhấn vào đây để tâm sự nhá Bae iu ơi!</p>
-  <img class="cat" onclick="catTalk('Bấm vào đi màaa 😚')" src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
-  <img class="dog" onclick="dogTalk('Anh bấm nhanh lên đi 😤')" src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif">
+  <img id="memeImg" class="meme">
   <br>
   <button onclick="next('p2')">💘 Bắt đầu 💘</button>
 </div>
 
-<!-- PAGE TEMPLATE (rút gọn) -->
 <div class="page" id="p2">
   <h1>Anh có thương em không?</h1>
+  <img id="memeImg" class="meme">
   <button onclick="next('p3')">Anh có 💖</button>
   <button onclick="next('p3')">Nào dám trả lời không 😏</button>
 </div>
 
 <div class="page" id="p3">
   <h1>Em cũng thương anh lắm 💖</h1>
+  <img id="memeImg" class="meme">
   <button onclick="next('p4')">Tiếp tục ➡️</button>
 </div>
 
 <div class="page" id="p4">
-  <h1>Dạo này anh thấy thế nào ạ?</h1>
+  <h1>Dạo này anh thấy thế nào?</h1>
+  <img id="memeImg" class="meme">
   <input id="q1">
   <button onclick="next('p5')">➡️</button>
 </div>
 
 <div class="page" id="p5">
   <h1>Món ăn anh thích nhất?</h1>
+  <img id="memeImg" class="meme">
   <input id="q2">
   <button onclick="next('p6')">➡️</button>
 </div>
 
 <div class="page" id="p6">
   <h1>Bây giờ anh muốn làm gì nhất?</h1>
+  <img id="memeImg" class="meme">
   <input id="q3">
   <button onclick="next('p7')">➡️</button>
 </div>
 
 <div class="page" id="p7">
   <h1>Anh thích được tặng quà gì?</h1>
+  <img id="memeImg" class="meme">
   <input id="q4">
   <button onclick="next('p8')">➡️</button>
 </div>
 
 <div class="page" id="p8">
   <h1>Điều gì ở em làm anh phiền lòng?</h1>
+  <img id="memeImg" class="meme">
   <input id="q5">
   <button onclick="sendAllData(); next('p9')">💌 Gửi</button>
 </div>
@@ -151,25 +156,47 @@ button {
 <div class="page" id="p9">
   <h1>💖 Em sẽ cố gắng tốt hơn 💖</h1>
   <p>I love you 💘</p>
+  <img id="memeImg" class="meme">
   <button onclick="next('p1')">🔄 Làm lại</button>
 </div>
 
 <script>
 
-// CHUYỂN TRANG
+// ===== MEME THEO TRANG =====
+const memes = {
+  p1:{img:"https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif",text:"Bấm vô đi màaa 😚"},
+  p2:{img:"https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif",text:"Trả lời cho đàng hoàng nha 😏"},
+  p3:{img:"https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif",text:"Biết mà 😚💖"},
+  p4:{img:"https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif",text:"Viết dễ thương nhaaa 💕"},
+  p5:{img:"https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif",text:"Ăn gì nhớ chia nha 😤"},
+  p6:{img:"https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif",text:"Đang nghĩ gì đó 😏"},
+  p7:{img:"https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif",text:"Quà gì đâyyy 🎁"},
+  p8:{img:"https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif",text:"Câu này quan trọng đó 😢"},
+  p9:{img:"https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif",text:"Yêu anh nhiều lắm 💘"}
+};
+
+// ===== CHUYỂN TRANG =====
 function next(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+  let page=document.getElementById(id);
+  page.classList.add('active');
+
+  let meme=memes[id];
+  if(meme){
+    let img=page.querySelector("#memeImg");
+    img.src=meme.img;
+    setTimeout(()=>catTalk(meme.text),300);
+  }
 }
 
-// BONG BÓNG NÓI
-function createBubble(text, bottom){
+// ===== BONG BÓNG NÓI =====
+function catTalk(text){
   let bubble=document.createElement("div");
   bubble.innerText=text;
 
   Object.assign(bubble.style,{
     position:"fixed",
-    bottom:bottom,
+    bottom:"120px",
     left:"50%",
     transform:"translateX(-50%)",
     background:"white",
@@ -184,10 +211,7 @@ function createBubble(text, bottom){
   setTimeout(()=>bubble.remove(),4000);
 }
 
-function catTalk(t){ createBubble(t,"120px"); }
-function dogTalk(t){ createBubble(t,"200px"); }
-
-// BẮN TIM
+// ===== BẮN TIM =====
 document.addEventListener("click",(e)=>{
   let heart=document.createElement("div");
   heart.innerHTML="💖";
@@ -210,7 +234,7 @@ document.addEventListener("click",(e)=>{
   },30);
 });
 
-// TIM RƠI (chỉ 1 lần, tối ưu hơn)
+// ===== TIM RƠI =====
 setInterval(()=>{
   let heart=document.createElement("div");
   heart.innerHTML=["💖","💘","💕","💝"][Math.floor(Math.random()*4)];
@@ -226,12 +250,11 @@ setInterval(()=>{
   setTimeout(()=>heart.remove(),5000);
 },300);
 
-// GOOGLE FORM
-const GOOGLE_FORM_ACTION="YOUR_LINK_HERE";
+// ===== GOOGLE FORM =====
+const GOOGLE_FORM_ACTION="https://docs.google.com/forms/d/e/1FAIpQLSdYuCVEM7QCvCqjvtUc6SuVrNW1flerqN3PaKQ4poPHXj2uIA/formResponse";
 
 function sendAllData(){
   let data=new FormData();
-
   data.append("entry.137169317", q1.value);
   data.append("entry.454111835", q2.value);
   data.append("entry.1872124055", q3.value);
