@@ -3,223 +3,207 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>💖 Love Page 💖</title>
+<title>💖 Messenger Love 💖</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 body{
   margin:0;
   font-family:'Quicksand';
-  background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fbc2eb,#a18cd1);
-  background-size:400% 400%;
-  animation:gradientMove 10s infinite;
-  text-align:center;
+  background:#f0f2f5;
+}
+
+/* APP */
+.app{
+  max-width:400px;
+  margin:auto;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  background:white;
+}
+
+/* HEADER */
+.header{
+  background:#0084ff;
   color:white;
-  overflow:hidden;
+  padding:12px;
+  font-weight:bold;
 }
 
-/* PAGE */
-.page{
-  position:absolute;
-  width:100%;
-  top:0;
-  left:0;
-  opacity:0;
-  transform:translateX(50px);
-  transition:0.5s;
-  pointer-events:none;
-}
-.page.active{
-  opacity:1;
-  transform:translateX(0);
-  pointer-events:auto;
-}
-
-/* TITLE */
-h1{
-  font-family:'Great Vibes';
-  font-size:40px;
-}
-
-/* INPUT */
-input{
+/* CHAT */
+.chat{
+  flex:1;
+  overflow-y:auto;
   padding:10px;
-  border-radius:10px;
-  border:none;
-  width:80%;
+  display:flex;
+  flex-direction:column;
 }
 
-/* BUTTON */
+/* MESSAGE */
+.msg{
+  background:#e4e6eb;
+  padding:8px 12px;
+  border-radius:18px;
+  margin:5px 0;
+  max-width:70%;
+  align-self:flex-start;
+  position:relative;
+  animation:fadeIn 0.3s;
+}
+
+/* REACTION */
+.react{
+  font-size:14px;
+  margin-left:10px;
+}
+
+/* INPUT AREA */
+.inputArea{
+  padding:10px;
+  border-top:1px solid #ccc;
+}
+
+input{
+  width:70%;
+  padding:8px;
+  border-radius:20px;
+  border:1px solid #ccc;
+}
+
 button{
-  padding:10px 15px;
+  padding:8px 12px;
   border:none;
-  border-radius:10px;
-  background:#ff4da6;
+  border-radius:20px;
+  background:#0084ff;
   color:white;
-  margin:10px;
 }
 
-/* MEME */
-.meme{
-  width:150px;
-  margin-top:15px;
-  animation:bounce 2s infinite;
+/* TYPING */
+.typing{
+  font-size:14px;
+  color:gray;
+  margin:5px;
 }
 
-/* ANIMATION */
-@keyframes gradientMove{
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
-}
-@keyframes bounce{
-  50%{transform:translateY(-10px);}
-}
-@keyframes fall{
-  from{transform:translateY(-10vh);}
-  to{transform:translateY(110vh);}
+/* ANIM */
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(10px);}
+  to{opacity:1;}
 }
 </style>
 </head>
 
 <body>
 
-<!-- PAGE 1 -->
-<div class="page active" id="p1">
-  <h1>💖 Chào người em yêu 💖</h1>
-  <img class="meme" id="meme">
-  <button onclick="next('p2')">Bắt đầu 💘</button>
-</div>
+<div class="app">
 
-<!-- PAGE 2 -->
-<div class="page" id="p2">
-  <h1>Anh có thương em không?</h1>
-  <img class="meme" id="meme">
-  <button onclick="next('p3')">Có 💖</button>
-  <button onclick="next('p3')">Không dám 😏</button>
-</div>
+  <div class="header">💖 Người yêu 💖</div>
 
-<!-- PAGE 3 -->
-<div class="page" id="p3">
-  <h1>Dạo này anh thấy sao?</h1>
-  <img class="meme" id="meme">
-  <input id="q1">
-  <button onclick="next('p4')">➡️</button>
-</div>
+  <div class="chat" id="chat"></div>
 
-<!-- PAGE 4 -->
-<div class="page" id="p4">
-  <h1>Anh thích ăn gì nhất?</h1>
-  <img class="meme" id="meme">
-  <input id="q2">
-  <button onclick="next('p5')">➡️</button>
-</div>
+  <div class="inputArea">
+    <input id="input" placeholder="Nhắn gì đó...">
+    <button onclick="send()">Gửi</button>
+  </div>
 
-<!-- PAGE 5 -->
-<div class="page" id="p5">
-  <h1>Anh muốn làm gì nhất?</h1>
-  <img class="meme" id="meme">
-  <input id="q3">
-  <button onclick="next('p6')">➡️</button>
-</div>
-
-<!-- PAGE 6 -->
-<div class="page" id="p6">
-  <h1>Anh muốn được tặng gì?</h1>
-  <img class="meme" id="meme">
-  <input id="q4">
-  <button onclick="next('p7')">➡️</button>
-</div>
-
-<!-- PAGE 7 -->
-<div class="page" id="p7">
-  <h1>Điều gì làm anh phiền lòng?</h1>
-  <img class="meme" id="meme">
-  <input id="q5">
-  <button onclick="sendData(); next('p8')">💌 Gửi</button>
-</div>
-
-<!-- PAGE 8 -->
-<div class="page" id="p8">
-  <h1>💖 Em sẽ cố gắng tốt hơn 💖</h1>
-  <p>I love you 💘</p>
-  <img class="meme" id="meme">
-  <button onclick="next('p1')">🔄 Làm lại</button>
 </div>
 
 <script>
 
-// MEME
-const memes={
- p1:"https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif",
- p2:"https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif",
- p3:"https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif",
- p4:"https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif",
- p5:"https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif",
- p6:"https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif",
- p7:"https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif",
- p8:"https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif"
-};
+// CHAT SCRIPT
+let step=0;
 
-// NEXT PAGE (mượt)
-function next(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  let page=document.getElementById(id);
-  page.classList.add('active');
-
-  // set meme
-  page.querySelector("#meme").src=memes[id];
-}
-
-// TIM CLICK
-document.addEventListener("click",e=>{
-  let heart=document.createElement("div");
-  heart.innerHTML="💖";
-  heart.style.position="fixed";
-  heart.style.left=e.clientX+"px";
-  heart.style.top=e.clientY+"px";
-  heart.style.fontSize="20px";
-  document.body.appendChild(heart);
-
-  let up=setInterval(()=>{
-    heart.style.top=(parseInt(heart.style.top)-5)+"px";
-    if(parseInt(heart.style.top)<0){
-      heart.remove();
-      clearInterval(up);
-    }
-  },30);
-});
-
-// TIM RƠI
-setInterval(()=>{
-  let h=document.createElement("div");
-  h.innerHTML=["💖","💕","💘"][Math.floor(Math.random()*3)];
-  h.style.position="fixed";
-  h.style.left=Math.random()*100+"vw";
-  h.style.fontSize="20px";
-  h.style.animation="fall 5s linear";
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),5000);
-},300);
+const script=[
+ "Chào anh 💖",
+ "Anh có thương em không?",
+ "Dạo này anh thấy sao?",
+ "Anh thích ăn gì nhất?",
+ "Anh muốn làm gì nhất?",
+ "Anh muốn quà gì?",
+ "Có gì làm anh buồn không?",
+ "Em yêu anh nhiều lắm 💘"
+];
 
 // GOOGLE FORM
 const FORM="https://docs.google.com/forms/d/e/1FAIpQLSdYuCVEM7QCvCqjvtUc6SuVrNW1flerqN3PaKQ4poPHXj2uIA/formResponse";
 
-function sendData(){
+// HIỆN TIN NHẮN
+function bot(msg){
+  let div=document.createElement("div");
+  div.className="msg";
+  div.innerHTML=msg + `<div class="react">❤️ 😆 😢</div>`;
+  chat.appendChild(div);
+  chat.scrollTop=chat.scrollHeight;
+}
+
+// TYPING
+function typing(callback){
+  let t=document.createElement("div");
+  t.className="typing";
+  t.innerText="Đang nhập...";
+  chat.appendChild(t);
+  chat.scrollTop=chat.scrollHeight;
+
+  setTimeout(()=>{
+    t.remove();
+    callback();
+  },1000);
+}
+
+// SEND USER
+function send(){
+  let val=input.value;
+  if(!val) return;
+
+  let div=document.createElement("div");
+  div.className="msg";
+  div.style.alignSelf="flex-end";
+  div.style.background="#0084ff";
+  div.style.color="white";
+  div.innerText=val;
+
+  chat.appendChild(div);
+  input.value="";
+  chat.scrollTop=chat.scrollHeight;
+
+  save(val);
+
+  step++;
+  if(step<script.length){
+    typing(()=>bot(script[step]));
+  } else {
+    sendForm();
+  }
+}
+
+// SAVE DATA
+let answers=[];
+function save(val){
+  answers.push(val);
+}
+
+// SEND FORM
+function sendForm(){
   let data=new FormData();
-  data.append("entry.137169317", q1.value);
-  data.append("entry.454111835", q2.value);
-  data.append("entry.1872124055", q3.value);
-  data.append("entry.669638336", q4.value);
-  data.append("entry.559059606", q5.value);
+  data.append("entry.137169317", answers[0]||"");
+  data.append("entry.454111835", answers[1]||"");
+  data.append("entry.1872124055", answers[2]||"");
+  data.append("entry.669638336", answers[3]||"");
+  data.append("entry.559059606", answers[4]||"");
 
   fetch(FORM,{
     method:"POST",
     mode:"no-cors",
     body:data
   });
+
+  typing(()=>bot("Em đã nhận được rồi 💖"));
 }
+
+// INIT
+typing(()=>bot(script[0]));
 
 </script>
 
