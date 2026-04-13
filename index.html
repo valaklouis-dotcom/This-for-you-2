@@ -3,257 +3,210 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>💖 Love Page 💖</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-body {
-  margin: 0;
-  font-family: 'Quicksand', sans-serif;
-  background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
-  background-size: 400% 400%;
-  animation: gradientMove 10s ease infinite;
-  text-align: center;
-  color: white;
-  overflow-x: hidden;
+body{
+  margin:0;
+  font-family:'Quicksand';
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fbc2eb,#a18cd1);
+  background-size:400% 400%;
+  animation:gradientMove 10s infinite;
+  text-align:center;
+  color:white;
+  overflow:hidden;
 }
 
-/* layout */
-.page {
-  display: none;
-  padding: 20px;
-  max-width: 600px;
-  margin: auto;
+/* PAGE */
+.page{
+  position:absolute;
+  width:100%;
+  top:0;
+  left:0;
+  opacity:0;
+  transform:translateX(50px);
+  transition:0.5s;
+  pointer-events:none;
 }
-.active { display: block; }
-
-/* title */
-h1 {
-  font-family: 'Great Vibes', cursive;
-  font-size: clamp(28px, 6vw, 60px);
-  text-shadow: 0 0 20px pink;
-}
-
-/* input */
-input {
-  padding: 12px;
-  border-radius: 12px;
-  border: none;
-  width: 90%;
-  max-width: 400px;
-  font-size: 16px;
+.page.active{
+  opacity:1;
+  transform:translateX(0);
+  pointer-events:auto;
 }
 
-/* button */
-button {
-  padding: 10px 18px;
-  border: none;
-  border-radius: 12px;
-  background: #ff4da6;
-  color: white;
-  font-size: 16px;
-  margin: 10px;
-  cursor: pointer;
+/* TITLE */
+h1{
+  font-family:'Great Vibes';
+  font-size:40px;
 }
 
-/* meme */
-.meme {
-  width: 150px;
-  margin-top: 15px;
-  animation: fadeIn 0.6s ease, bounce 2s infinite;
+/* INPUT */
+input{
+  padding:10px;
+  border-radius:10px;
+  border:none;
+  width:80%;
 }
 
-/* animations */
-@keyframes gradientMove {
+/* BUTTON */
+button{
+  padding:10px 15px;
+  border:none;
+  border-radius:10px;
+  background:#ff4da6;
+  color:white;
+  margin:10px;
+}
+
+/* MEME */
+.meme{
+  width:150px;
+  margin-top:15px;
+  animation:bounce 2s infinite;
+}
+
+/* ANIMATION */
+@keyframes gradientMove{
   0%{background-position:0% 50%;}
   50%{background-position:100% 50%;}
   100%{background-position:0% 50%;}
 }
-
-@keyframes bounce {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+@keyframes bounce{
+  50%{transform:translateY(-10px);}
 }
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px);}
-  to { opacity: 1; transform: translateY(0);}
-}
-
-@keyframes fall {
-  from { transform: translateY(-10vh); }
-  to { transform: translateY(110vh); }
+@keyframes fall{
+  from{transform:translateY(-10vh);}
+  to{transform:translateY(110vh);}
 }
 </style>
 </head>
 
 <body>
 
-<!-- MUSIC -->
-<audio autoplay loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3">
-</audio>
-
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
-  <h1>💖 Chào người em yêu ạ! 💖</h1>
-  <p>Nhấn vào đây để tâm sự nhá Bae iu ơi!</p>
-  <img id="memeImg" class="meme">
-  <br>
-  <button onclick="next('p2')">💘 Bắt đầu 💘</button>
+  <h1>💖 Chào người em yêu 💖</h1>
+  <img class="meme" id="meme">
+  <button onclick="next('p2')">Bắt đầu 💘</button>
 </div>
 
+<!-- PAGE 2 -->
 <div class="page" id="p2">
   <h1>Anh có thương em không?</h1>
-  <img id="memeImg" class="meme">
-  <button onclick="next('p3')">Anh có 💖</button>
-  <button onclick="next('p3')">Nào dám trả lời không 😏</button>
+  <img class="meme" id="meme">
+  <button onclick="next('p3')">Có 💖</button>
+  <button onclick="next('p3')">Không dám 😏</button>
 </div>
 
+<!-- PAGE 3 -->
 <div class="page" id="p3">
-  <h1>Em cũng thương anh lắm 💖</h1>
-  <img id="memeImg" class="meme">
-  <button onclick="next('p4')">Tiếp tục ➡️</button>
+  <h1>Dạo này anh thấy sao?</h1>
+  <img class="meme" id="meme">
+  <input id="q1">
+  <button onclick="next('p4')">➡️</button>
 </div>
 
+<!-- PAGE 4 -->
 <div class="page" id="p4">
-  <h1>Dạo này anh thấy thế nào?</h1>
-  <img id="memeImg" class="meme">
-  <input id="q1">
+  <h1>Anh thích ăn gì nhất?</h1>
+  <img class="meme" id="meme">
+  <input id="q2">
   <button onclick="next('p5')">➡️</button>
 </div>
 
+<!-- PAGE 5 -->
 <div class="page" id="p5">
-  <h1>Món ăn anh thích nhất?</h1>
-  <img id="memeImg" class="meme">
-  <input id="q2">
+  <h1>Anh muốn làm gì nhất?</h1>
+  <img class="meme" id="meme">
+  <input id="q3">
   <button onclick="next('p6')">➡️</button>
 </div>
 
+<!-- PAGE 6 -->
 <div class="page" id="p6">
-  <h1>Bây giờ anh muốn làm gì nhất?</h1>
-  <img id="memeImg" class="meme">
-  <input id="q3">
+  <h1>Anh muốn được tặng gì?</h1>
+  <img class="meme" id="meme">
+  <input id="q4">
   <button onclick="next('p7')">➡️</button>
 </div>
 
+<!-- PAGE 7 -->
 <div class="page" id="p7">
-  <h1>Anh thích được tặng quà gì?</h1>
-  <img id="memeImg" class="meme">
-  <input id="q4">
-  <button onclick="next('p8')">➡️</button>
-</div>
-
-<div class="page" id="p8">
-  <h1>Điều gì ở em làm anh phiền lòng?</h1>
-  <img id="memeImg" class="meme">
+  <h1>Điều gì làm anh phiền lòng?</h1>
+  <img class="meme" id="meme">
   <input id="q5">
-  <button onclick="sendAllData(); next('p9')">💌 Gửi</button>
+  <button onclick="sendData(); next('p8')">💌 Gửi</button>
 </div>
 
-<div class="page" id="p9">
+<!-- PAGE 8 -->
+<div class="page" id="p8">
   <h1>💖 Em sẽ cố gắng tốt hơn 💖</h1>
   <p>I love you 💘</p>
-  <img id="memeImg" class="meme">
+  <img class="meme" id="meme">
   <button onclick="next('p1')">🔄 Làm lại</button>
 </div>
 
 <script>
 
-// ===== MEME THEO TRANG =====
-const memes = {
-  p1:{img:"https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif",text:"Bấm vô đi màaa 😚"},
-  p2:{img:"https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif",text:"Trả lời cho đàng hoàng nha 😏"},
-  p3:{img:"https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif",text:"Biết mà 😚💖"},
-  p4:{img:"https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif",text:"Viết dễ thương nhaaa 💕"},
-  p5:{img:"https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif",text:"Ăn gì nhớ chia nha 😤"},
-  p6:{img:"https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif",text:"Đang nghĩ gì đó 😏"},
-  p7:{img:"https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif",text:"Quà gì đâyyy 🎁"},
-  p8:{img:"https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif",text:"Câu này quan trọng đó 😢"},
-  p9:{img:"https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif",text:"Yêu anh nhiều lắm 💘"}
+// MEME
+const memes={
+ p1:"https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif",
+ p2:"https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif",
+ p3:"https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif",
+ p4:"https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif",
+ p5:"https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif",
+ p6:"https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif",
+ p7:"https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif",
+ p8:"https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif"
 };
 
-// ===== CHUYỂN TRANG =====
+// NEXT PAGE (mượt)
 function next(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   let page=document.getElementById(id);
   page.classList.add('active');
 
-  let meme=memes[id];
-  if(meme){
-    let img=page.querySelector("#memeImg");
-    img.src=meme.img;
-    setTimeout(()=>catTalk(meme.text),300);
-  }
+  // set meme
+  page.querySelector("#meme").src=memes[id];
 }
 
-// ===== BONG BÓNG NÓI =====
-function catTalk(text){
-  let bubble=document.createElement("div");
-  bubble.innerText=text;
-
-  Object.assign(bubble.style,{
-    position:"fixed",
-    bottom:"120px",
-    left:"50%",
-    transform:"translateX(-50%)",
-    background:"white",
-    color:"#ff4da6",
-    padding:"10px 15px",
-    borderRadius:"20px",
-    boxShadow:"0 0 10px pink",
-    zIndex:"9999"
-  });
-
-  document.body.appendChild(bubble);
-  setTimeout(()=>bubble.remove(),4000);
-}
-
-// ===== BẮN TIM =====
-document.addEventListener("click",(e)=>{
+// TIM CLICK
+document.addEventListener("click",e=>{
   let heart=document.createElement("div");
   heart.innerHTML="💖";
-
-  Object.assign(heart.style,{
-    position:"fixed",
-    left:e.clientX+"px",
-    top:e.clientY+"px",
-    fontSize:"20px"
-  });
-
+  heart.style.position="fixed";
+  heart.style.left=e.clientX+"px";
+  heart.style.top=e.clientY+"px";
+  heart.style.fontSize="20px";
   document.body.appendChild(heart);
 
-  let move=setInterval(()=>{
+  let up=setInterval(()=>{
     heart.style.top=(parseInt(heart.style.top)-5)+"px";
     if(parseInt(heart.style.top)<0){
       heart.remove();
-      clearInterval(move);
+      clearInterval(up);
     }
   },30);
 });
 
-// ===== TIM RƠI =====
+// TIM RƠI
 setInterval(()=>{
-  let heart=document.createElement("div");
-  heart.innerHTML=["💖","💘","💕","💝"][Math.floor(Math.random()*4)];
-
-  Object.assign(heart.style,{
-    position:"fixed",
-    left:Math.random()*100+"vw",
-    fontSize:(15+Math.random()*20)+"px",
-    animation:"fall 5s linear"
-  });
-
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),5000);
+  let h=document.createElement("div");
+  h.innerHTML=["💖","💕","💘"][Math.floor(Math.random()*3)];
+  h.style.position="fixed";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize="20px";
+  h.style.animation="fall 5s linear";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),5000);
 },300);
 
-// ===== GOOGLE FORM =====
-const GOOGLE_FORM_ACTION="https://docs.google.com/forms/d/e/1FAIpQLSdYuCVEM7QCvCqjvtUc6SuVrNW1flerqN3PaKQ4poPHXj2uIA/formResponse";
+// GOOGLE FORM
+const FORM="https://docs.google.com/forms/d/e/1FAIpQLSdYuCVEM7QCvCqjvtUc6SuVrNW1flerqN3PaKQ4poPHXj2uIA/formResponse";
 
-function sendAllData(){
+function sendData(){
   let data=new FormData();
   data.append("entry.137169317", q1.value);
   data.append("entry.454111835", q2.value);
@@ -261,7 +214,7 @@ function sendAllData(){
   data.append("entry.669638336", q4.value);
   data.append("entry.559059606", q5.value);
 
-  fetch(GOOGLE_FORM_ACTION,{
+  fetch(FORM,{
     method:"POST",
     mode:"no-cors",
     body:data
